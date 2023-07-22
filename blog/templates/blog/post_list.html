@@ -10,7 +10,7 @@
     <!-- start navbar -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Navbar</a>
+          <a class="navbar-brand" href="{% url 'posts' %}">HOME</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -20,10 +20,9 @@
                 <a class="nav-link active" aria-current="page" href="#">Posts</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{post/new}">Add Post</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'post_create' %}">Add Post</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
               </li>
              
             </ul>
@@ -38,13 +37,14 @@
 
 
     <div class="container">
-        {% for post in posts %}
+        {% for post in post_list %}
         <div class="card m-5" style="width: 18rem;">
             <img src="{{ post.image.url }}" class="card-img-top">
             <div class="card-body">
-              <h5 class="card-title"><a href="detail/{{post.id}}">{{ post.title }}</a></h5>
+              <h5 class="card-title"><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h5>
               <p class="card-text">{{ post.content }}</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <a href="{% url 'post_update' post.pk %}" class="btn btn-primary">Edit</a>
+              <a href="{% url 'post_delete' post.pk %}" class="btn btn-danger">delete</a>
             </div>
           </div>
           {% endfor %}
