@@ -9,16 +9,38 @@
   <body>
 
     <div class="container my-5">
-        <div class="card mb-3">
+      <div class="card mb-3">
         <img src="{{ post.image.url }}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">{{ post.title }}</h5>
           <p class="card-text">{{ post.content }}.</p>
           <p class="card-text"><small class="text-body-secondary">{{ post.create_date }}</small></p>
         </div>
-      </div>
+        <div class="mx-5">
+          {% for comment in comments %}
+          <blockquote class="blockquote mb-0">
+            <p>{{ comment.user}}</p>
+            <footer class="blockquote-footer">{{comment.comment}}<cite title="Source Title"> | {{ comment.create_at}} </cite></footer>
+          </blockquote>
 
+          {% endfor %}
+          <div class="py-2">
+            <form method="post">
+              {% csrf_token  %}
+              <!-- {{ form }} -->
+              <label for="comment">Add Comment</label>
+              <input id="comment" name="comment" type="text" value="{{comment}}">
+
+              <input type="submit" value="comment" >
+
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
+    
+
+  
 
     
 

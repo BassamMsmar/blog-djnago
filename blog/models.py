@@ -16,3 +16,15 @@ class Post(models.Model):
 
     def __str__(self) -> str:
         return self.title
+    
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comment_auther')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE,  related_name='comment_post')
+    create_at = models.DateTimeField(default=timezone.now)
+    comment = models.CharField(max_length=200)
+
+
+    def __str__(self) -> str:
+        return str(self.user)
+    
